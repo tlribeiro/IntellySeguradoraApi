@@ -7,7 +7,7 @@ Deploy Elastic BeanStalk<br/>
 Habilitado LoadBalance adicionado HTTPS através AWS Certificate Manager (ACM)<br/>
 URL BeanStalk : http://tlr-intelly-malucelli-api.sa-east-1.elasticbeanstalk.com/<br/>
 URL HTTPS: https://api.promocoes.curitiba.br/<br/>
-URL Projeto WEB: https://api.promocoes.curitiba.br/<br/>
+URL Projeto WEB: https://tlr-intelly-malucelli-view.herokuapp.com/<br/>
 
 # Dados de Acesso
 Usuário: thiago<br/>
