@@ -14,12 +14,19 @@ namespace IntellySeguradoraApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
+            //CreateWebHostBuilder(args).Build().Run();
+            var host = new WebHostBuilder()
+              .UseKestrel()
+              .ConfigureAppConfiguration((builderContext, config) =>
+              {
+                  config.AddJsonFile("appsettings.json", optional: false);
+              })
+              .UseContentRoot(Directory.GetCurrentDirectory())
+              .UseIISIntegration()
+              .UseStartup<Startup>()
+              .Build();
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+            host.Run();
+        }
     }
 }

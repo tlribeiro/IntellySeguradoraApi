@@ -13,6 +13,7 @@ using IntellySeguradoraApi.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IntellySeguradoraApi
 {
@@ -33,7 +34,7 @@ namespace IntellySeguradoraApi
             //Define o atributo da configuração.
             Configuration = configuration;
         }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -46,7 +47,10 @@ namespace IntellySeguradoraApi
             //Habilita o CORS para aceitar requisições do dominio que está a aplicação em REACT.
             services.AddCors(c =>
             {
-                c.AddPolicy("IntellyOrigin", options => options.WithOrigins("http://localhost:3000", "http://localhost:8080")
+                c.AddPolicy("IntellyOrigin", options =>
+                                             options.WithOrigins("http://localhost:3000",
+                                                                 "http://localhost:8080",
+                                                                 "https://tlr-intelly-malucelli-view.herokuapp.com")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
@@ -66,6 +70,8 @@ namespace IntellySeguradoraApi
 
             //Http Context.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //Define a compatiblidade da versão.
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }
 
@@ -134,6 +140,11 @@ namespace IntellySeguradoraApi
             app.UseCors("IntellyOrigin");
             //Adiciona o MVC.
             app.UseMvc();
+            //Define página inicial.
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("TLR - Intelly | JMalucelli");
+            });
         }
     }
 }
