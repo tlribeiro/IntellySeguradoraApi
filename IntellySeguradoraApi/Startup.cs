@@ -43,11 +43,12 @@ namespace IntellySeguradoraApi
             //Adiciiona o contexto do banco.
             //services.AddDbContext<IntellyDbContext>
             //(options => options.UseSqlServer(connection));
-            Console.WriteLine("-----------------------------------------------");
-            Console.WriteLine("------------- CARREGANDO CONTEXTO -------------");
-            Console.WriteLine("-----------------------------------------------");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("------------- CARREGANDO CONTEXTO --------------");
+            Console.WriteLine("------------------------------------------------");
 
             //Conexão com MySql
+            //var connection = Configuration["ConnectionString:AWS:MY_SQL"];
             var connection = Configuration["ConnectionString:Local:Docker"];
             services.AddDbContext<IntellyDbContext>
                 (options => options.UseMySql(connection));

@@ -1,10 +1,10 @@
-﻿----------------------------------------------------
+﻿-- --------------------------------------------------
 -- Projeto: Api para Login NetCore
 -- Descrição: Script para carregar os dados no Mysql
 --            via Docker Compose
 -- Autor: Thiago Ribeiro
 -- Data: 03/08/2019
-----------------------------------------------------
+-- --------------------------------------------------
 
 CREATE TABLE Users (
     UserId CHAR(36) NOT NULL,
