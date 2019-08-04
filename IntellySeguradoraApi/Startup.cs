@@ -39,10 +39,18 @@ namespace IntellySeguradoraApi
         public void ConfigureServices(IServiceCollection services)
         {
             //Recupera a string de conexão do banco de dados.
-            var connection = Configuration["ConnectionString:AWS:RDS"];
+            //var connection = Configuration["ConnectionString:AWS:RDS"];
             //Adiciiona o contexto do banco.
+            //services.AddDbContext<IntellyDbContext>
+            //(options => options.UseSqlServer(connection));
+            Console.WriteLine("-----------------------------------------------");
+            Console.WriteLine("------------- CARREGANDO CONTEXTO -------------");
+            Console.WriteLine("-----------------------------------------------");
+
+            //Conexão com MySql
+            var connection = Configuration["ConnectionString:Local:Docker"];
             services.AddDbContext<IntellyDbContext>
-                (options => options.UseSqlServer(connection));
+                (options => options.UseMySql(connection));
 
             //Habilita o CORS para aceitar requisições do dominio que está a aplicação em REACT.
             services.AddCors(c =>
@@ -72,7 +80,6 @@ namespace IntellySeguradoraApi
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Define a compatiblidade da versão.
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
         }
 
         /// <summary>
