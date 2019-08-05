@@ -17,5 +17,18 @@ deploy:
     docker push tlribeiro/intellyseguradoraapi;
   on:
     branch: master
+after_success:
+  - sudo apt-get -y install python3-pip python-dev
+  - sudo pip3 install -U setuptools
+  - sudo pip3 install -U virtualenvwrapper
+  - python3 -V
+  - pip3 -V
+  - pip3 uninstall wheel
+  - pip3 install wheel
+  - pip3 install awscli --upgrade --username
+  - export PATH=$PATH:$HOME/.local/bin
+  - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  - docker tag intellyseguradoraapi:latest $AWS_ECR_IMAGE_URL:latest
+  - docker push $AWS_ECR_IMAGE_URL:latest
 notifications:
   email: false
