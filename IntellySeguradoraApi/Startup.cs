@@ -151,7 +151,7 @@ namespace IntellySeguradoraApi
             //Define página inicial.
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("TLR - Intelly | JMalucelli");
+                await context.Response.WriteAsync("TLR - Intelly | JUNTO");
             });
         }
     }
