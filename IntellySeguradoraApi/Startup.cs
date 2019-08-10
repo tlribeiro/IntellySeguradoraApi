@@ -48,8 +48,8 @@ namespace IntellySeguradoraApi
             Console.WriteLine("------------------------------------------------");
 
             //Conexão com MySql
-            //var connection = Configuration["ConnectionString:AWS:MY_SQL"];
-            var connection = Configuration["ConnectionString:Local:Docker"];
+            var connection = Configuration["ConnectionString:AWS:MY_SQL"];
+            //var connection = Configuration["ConnectionString:Local:Docker"];
             services.AddDbContext<IntellyDbContext>
                 (options => options.UseMySql(connection));
 
