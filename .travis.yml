@@ -30,5 +30,6 @@ after_success:
   - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   - docker tag intellyseguradoraapi:latest $AWS_ECR_IMAGE_URL:latest
   - docker push $AWS_ECR_IMAGE_URL:latest
+  - aws ecs update-service --service $AWS_SERVICE_NAME --task_definition $AWS_TASK_NAME
 notifications:
   email: false
