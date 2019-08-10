@@ -30,6 +30,13 @@ after_success:
   - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   - docker tag intellyseguradoraapi:latest $AWS_ECR_IMAGE_URL:latest
   - docker push $AWS_ECR_IMAGE_URL:latest
-  - aws ecs update-service --service $AWS_SERVICE_NAME --task-definition $AWS_TASK_NAME --cluster $AWS_CLUSTER_NAME
+  - add-apt-repository ppa:eugenesan/ppa
+  - apt-get update
+  - apt-get install jq -v
+  - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
+  - sudo chmod +x /usr/bin/ecs-deploy
+  - echo "AWS ECS-Deploy está configurado!"
+  - ecs-deploy -c $AWS_CLUSTER_NAME -n $AWS_SERVICE_NAME -i $AWS_ECR_IMAGE_URL:latest -r $AWS_DEFAULT_REGION -t 240
+
 notifications:
   email: false
