@@ -56,7 +56,7 @@ namespace IntellySeguradoraApi
             //Habilita o CORS para aceitar requisições do dominio que está a aplicação em REACT.
             services.AddCors(c =>
             {
-                c.AddPolicy("IntellyOrigin", options =>
+                c.AddPolicy("TlrOrigin", options =>
                                              options.WithOrigins("http://localhost:3000",
                                                                  "http://localhost:8080",
                                                                  "https://tlr-intelly-malucelli-view.herokuapp.com")
@@ -145,13 +145,13 @@ namespace IntellySeguradoraApi
             //Adiciona o login ao console.
             loggerFactory.AddConsole();
             //Adiciona o CORS especifico.
-            app.UseCors("IntellyOrigin");
+            app.UseCors("TlrOrigin");
             //Adiciona o MVC.
             app.UseMvc();
             //Define página inicial.
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("TLR - Intelly | JUNTO - ECS");
+                await context.Response.WriteAsync("TLR - Software Architect | JUNTO - ECS");
             });
         }
     }
