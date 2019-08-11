@@ -13,7 +13,7 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker tag intellyseguradoraapi:$TRAVIS_JOB_ID tlribeiro/intellyseguradoraapi;
+    docker tag intellyseguradoraapi:latest tlribeiro/intellyseguradoraapi:$TRAVIS_JOB_ID;
     docker push tlribeiro/intellyseguradoraapi;
   on:
     branch: master
@@ -28,7 +28,7 @@ after_success:
   - pip3 install awscli --upgrade --user
   - export PATH=$PATH:$HOME/.local/bin
   - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-  - docker tag intellyseguradoraapi:$TRAVIS_JOB_ID $AWS_ECR_IMAGE_URL:$TRAVIS_JOB_ID
+  - docker tag intellyseguradoraapi:latest $AWS_ECR_IMAGE_URL:$TRAVIS_JOB_ID
   - docker push $AWS_ECR_IMAGE_URL:$TRAVIS_JOB_ID
   - add-apt-repository ppa:eugenesan/ppa
   - apt-get update
