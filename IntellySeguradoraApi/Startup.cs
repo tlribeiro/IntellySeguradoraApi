@@ -151,7 +151,7 @@ namespace IntellySeguradoraApi
             //Define página inicial.
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("TLR - Software Architect | JUNTO - ECS");
+                await context.Response.WriteAsync("TLR - Software Architect | JUNTO - ECS Deploy");
             });
         }
     }
