@@ -13,7 +13,7 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker tag intellyseguradoraapi:$AWS_DEFAULT_REGION tlribeiro/intellyseguradoraapi;
+    docker tag intellyseguradoraapi:$TRAVIS_JOB_ID tlribeiro/intellyseguradoraapi;
     docker push tlribeiro/intellyseguradoraapi;
   on:
     branch: master
