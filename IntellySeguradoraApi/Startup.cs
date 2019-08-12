@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace IntellySeguradoraApi
 {
@@ -62,6 +64,18 @@ namespace IntellySeguradoraApi
                                                                  "https://tlr-intelly-malucelli-view.herokuapp.com")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+            });
+
+            //Adicionando Swagger Service.
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "TLR - Software Architect | JUNTO - ECS Deploy - Docker - NetCore 2.2",
+                        Version = "v1"
+                    });
+
             });
 
             //Repositório do usuário.
@@ -148,6 +162,19 @@ namespace IntellySeguradoraApi
             app.UseCors("TlrOrigin");
             //Adiciona o MVC.
             app.UseMvc();
+
+            //Habilitando Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TLR API V1");
+            });
+
+            //Starting our API in Swagger page
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+
             //Define página inicial.
             app.Run(async (context) =>
             {
