@@ -1,6 +1,8 @@
 # IntellySeguradoraApi
 Teste para Arquiteto de Software Intelly.
 
+[![Build Status](https://travis-ci.org/tlribeiro/IntellySeguradoraApi.svg?branch=master)](https://travis-ci.org/tlribeiro/IntellySeguradoraApi)
+
 # Dados Aplicação
 Alterado Versão 2.0 para 2.2<br/>
 Deploy Elastic BeanStalk<br/>
